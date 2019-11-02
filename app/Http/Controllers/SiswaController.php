@@ -88,4 +88,9 @@ class SiswaController extends Controller
         // return $contents = Storage::get('uploads/e9x5yfGdvqcOxgOXXyVGof78zvY0SSVjxaWBMqpq.png');
         // echo asset('storage/app/uploads/e9x5yfGdvqcOxgOXXyVGof78zvY0SSVjxaWBMqpq.png');
     }
+
+    public function getnis(){
+        $data = Siswa::get('nis');
+        return $this->respJSON($data, true);
+    }
 }

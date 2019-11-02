@@ -24,7 +24,7 @@ class CreateSiswasTable extends Migration
             $table->date('tgl_lahir');
             $table->string('tempat_lahir', 20);
             $table->string('no_telp', 30);
-            $table->string('email', 30)->unique();
+            $table->string('email', 50)->unique();
             $table->string('foto', 100);
             $table->timestamps();
         });

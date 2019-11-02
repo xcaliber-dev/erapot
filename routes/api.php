@@ -22,3 +22,7 @@ Route::get('siswasingle/{nis}', 'SiswaController@showSingle');
 Route::post('siswainsert', 'SiswaController@insert');
 Route::post('tesfoto', 'SiswaController@testphoto');
 Route::get('getfoto', 'SiswaController@getfoto');
+Route::get('getnis', 'SiswaController@getnis');
+
+Route::get('nilaisiswa', 'NilaiSiswaController@semua');
+Route::get('rawsql/{nis}', 'NilaiSiswaController@test');
