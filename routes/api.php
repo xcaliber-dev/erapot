@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('siswaall', 'SiswaController@showAll');
+Route::get('siswasingle/{nis}', 'SiswaController@showSingle');
+Route::post('siswainsert', 'SiswaController@insert');
+Route::post('tesfoto', 'SiswaController@testphoto');
+Route::get('getfoto', 'SiswaController@getfoto');
