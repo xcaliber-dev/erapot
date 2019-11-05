@@ -12,6 +12,6 @@ class SiswaTablerSeeder extends Seeder
      */
     public function run()
     {
-        factory(Siswa::class, 50)->create();
+        factory(Siswa::class, 20)->create();
     }
 }

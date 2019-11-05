@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SiswaController extends Controller
 {
+    // =========== RETURN RESPONSE JSON
     private function respJSON($data=null, $success){
 
         $statuscode = 0;
@@ -18,6 +19,12 @@ class SiswaController extends Controller
             'success'=>$success,
             'data'=>$data,
         ], $statuscode);
+    }
+
+    public function getLastNIS(){
+        $data = Siswa::orderBy('nis', 'DESC')->get('nis')->first();
+        if ($data) return $data->nis+1; else return 1;
+        //$this->respJSON($data, true);
     }
 
     public function showAll(){
@@ -31,8 +38,10 @@ class SiswaController extends Controller
     }
 
     public function insert(Request $req){
+
+        // ============ VALIDASI
         $req->validate([
-            'nis'=>'required', 
+            // 'nis'=>'required', 
             'nama_siswa'=>'required', 
             'kelas'=>'required', 
             'status_lulus'=>'required', 
@@ -40,18 +49,31 @@ class SiswaController extends Controller
             'jenis_kelamin'=>'required', 
             'tgl_lahir'=>'required', 
             'tempat_lahir'=>'required', 
+            'no_telp'=>'required',
+            'foto' => 'required|file|image|mimes:jpeg,png,gif,webp,jpg|max:2048'
         ]);
 
+        // ===== MASUKIN SEMUA REQUEST KE MODEL BIAR SIMPEL INSERTNYA 
+        $model = $req->all();
+
+        // ============= AMBIL NIS TERAKHIR
+        $lastNIS = $this->getLastNIS();
+        $model['nis'] = $lastNIS;
+
+        // ======= CEK FOTO
         if ($req->hasFile('foto')){
             $file = $req->file('foto');
-            $fileName = $file->getClientOriginalName();
-            $req->file('foto')->move('storage/image/', $fileName);
+            // $fileName = $file->getClientOriginalName();
+            // $fileName = str_replace(' ', '', $fileName);
+            // $test = $req->file('foto')->move('storage/image/', $fileName);
+            $fileName = $req->file('foto')->store('public/image/');
+            $fileName = str_replace('public', 'storage', $fileName);
+            $model['foto'] = $fileName;
         }
-        $model = $req->all();
-        $model['foto'] = $fileName;
 
-        // $req->input('foto') = $fileName;
+        // dd($test);
 
+        // ===== INSERT DATA BARU
         $data = Siswa::create($model);
         if ($data){
             return $this->respJSON($data, true);

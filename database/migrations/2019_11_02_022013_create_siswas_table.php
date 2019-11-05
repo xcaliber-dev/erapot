@@ -13,7 +13,7 @@ class CreateSiswasTable extends Migration
      */
     public function up()
     {
-        Schema::create('siswas', function (Blueprint $table) {
+        Schema::create('siswa', function (Blueprint $table) {
             $table->string('nis', 10);
             $table->primary('nis');
             $table->string('nama_siswa', 30);
@@ -24,8 +24,8 @@ class CreateSiswasTable extends Migration
             $table->date('tgl_lahir');
             $table->string('tempat_lahir', 20);
             $table->string('no_telp', 30);
-            $table->string('email', 50)->unique();
-            $table->string('foto', 100);
+            $table->string('email', 50)->unique()->nullable();
+            $table->string('foto', 100)->nullable();
             $table->timestamps();
         });
     }

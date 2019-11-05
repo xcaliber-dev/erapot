@@ -13,7 +13,7 @@ $factory->define(Siswa::class, function (Faker $faker) {
     return [
         'nis'=>$faker->randomNumber(5),
         'nama_siswa'=>$faker->name,
-        'kelas'=>$faker->randomElement($kelas).'-'.$faker->randomElement($jurusan).$faker->randomElement($urutan),
+        'kelas'=>$faker->randomElement($kelas).'-'.$faker->randomElement($jurusan).'-'.$faker->randomElement($urutan),
         'status_lulus'=>false,
         'alamat'=>$faker->address,
         'jenis_kelamin'=>$faker->randomElement(['L', 'P']),

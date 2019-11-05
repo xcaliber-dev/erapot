@@ -13,12 +13,15 @@ class CreateNilaiSiswasTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilai_siswas', function (Blueprint $table) {
+        Schema::create('nilai_siswa', function (Blueprint $table) {
             $table->string('nis', 10);
             $table->primary('nis');
-            $table->integer('mtk');
-            $table->integer('ipa');
-            $table->integer('ips');
+            $table->integer('mtk')->default(0);
+            $table->integer('ipa')->default(0);
+            $table->integer('ips')->default(0);
+            $table->integer('bhs_indo')->default(0);
+            $table->integer('bhs_inggris')->default(0);
+            $table->integer('penjas')->default(0);
             $table->timestamps();
         });
     }
